@@ -2,6 +2,7 @@ Project Description: 2. Simple React application that displays "Hello, World!" o
 
 - TO RUN THIS PROJECT
   YOU MAY JUST CLONE THE REPO AND...
+  CHANGE THE DIRECTORY TO ReactHelloWorld
   RUN `npm install` OR `npm i` TO INSTALL ALL THE DEPENDENCIES
   RUN `npm run dev` TO START THE DEVELOPMENT SERVER
 
