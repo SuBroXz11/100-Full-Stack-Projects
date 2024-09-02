@@ -1,10 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { toast } from 'react-toastify';
 import "./Weather.css";
 import * as images from '../assets';
 
 const Weather = () => {
     const [weatherData, setWeatherData] = useState(false);
-    console.log(import.meta.env.VITE_API_KEY);
+    // console.log(import.meta.env.VITE_API_KEY);
+    const inputRef = useRef();
+
+    // making enter key functional for searching
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            search(inputRef.current.value);
+        }
+    };
 
     // Icon codes according to the API docs
     const allIcons = {
@@ -25,12 +34,20 @@ const Weather = () => {
     }
 
     const search = async (city) => {
+        if (city === "") {
+            toast.warning('Please enter a city name!');
+            return;
+        }
         try {
             // adding units as metric will give the value of temp in degrees as per API docs
             const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${import.meta.env.VITE_API_KEY}`
             const response = await fetch(url);
             const data = await response.json();
-            console.log(data);
+            if (!response.ok) {
+                toast.error(data.message);
+                return;
+            }
+            // console.log(data);
             const icon = allIcons[data.weather[0].icon] || images.clearIcon;
             setWeatherData({
                 humidity: data.main.humidity,
@@ -40,7 +57,8 @@ const Weather = () => {
                 icon: icon
             })
         } catch (error) {
-
+            setWeatherData(false)
+            toast.error('Error fetching the data from API')
         }
     }
     useEffect(() => {
@@ -48,32 +66,38 @@ const Weather = () => {
     }, [])
     return (
         <div className="weather">
+
             <div className="search-bar">
-                <input type="text" placeholder="Search" />
-                <img src={images.searchIcon} alt="Search Icon" />
+                <input type="text" placeholder="Search" ref={inputRef} onKeyDown={handleKeyDown} />
+                <img src={images.searchIcon} alt="Search Icon" onClick={() => search(inputRef.current.value)} />
             </div>
 
-            <img src={weatherData.icon} alt="Clear Icon" className="weather-icon" />
-            <p className="temperature">{weatherData.temperature}°c</p>
-            <p className="location">{weatherData.location}</p>
+            {/* Hide the details when there is some error with the API integraton */}
+            {weatherData &&
+                <>
+                    <img src={weatherData.icon} alt="Clear Icon" className="weather-icon" />
+                    <p className="temperature">{weatherData.temperature}°c</p>
+                    <p className="location">{weatherData.location}</p>
 
-            <div className="weather-data">
-                <div className="col">
-                    <img src={images.humidityIcon} alt="Humidity Icon" />
-                    <div>
-                        <p>{weatherData.humidity} %</p>
-                        <span>Humidity</span>
-                    </div>
-                </div>
+                    <div className="weather-data">
+                        <div className="col">
+                            <img src={images.humidityIcon} alt="Humidity Icon" />
+                            <div>
+                                <p>{weatherData.humidity} %</p>
+                                <span>Humidity</span>
+                            </div>
+                        </div>
 
-                <div className="col">
-                    <img src={images.windIcon} alt="Wind Speed Icon" />
-                    <div>
-                        <p>{weatherData.windSpeed} Km/h</p>
-                        <span>Wind Speed</span>
+                        <div className="col">
+                            <img src={images.windIcon} alt="Wind Speed Icon" />
+                            <div>
+                                <p>{weatherData.windSpeed} Km/h</p>
+                                <span>Wind Speed</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </>}
+
         </div>
     );
 }
