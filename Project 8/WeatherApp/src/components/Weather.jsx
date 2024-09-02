@@ -62,6 +62,7 @@ const Weather = () => {
         }
     }
     useEffect(() => {
+        // initial value
         search("Kathmandu");
     }, [])
     return (
