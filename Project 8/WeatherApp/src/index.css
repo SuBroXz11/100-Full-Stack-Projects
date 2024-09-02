@@ -12,5 +12,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #e2d4ff;
+    position: relative;
+    overflow: hidden;
+}
+
+.app::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://img.freepik.com/free-vector/sky-background-video-conferencing_23-2148639325.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: blur(8px) brightness(70%);
+    z-index: -1;
+    /* Places the pseudo-element behind the content */
+    opacity: 0.7;
+    /* Adjusts the fade effect */
 }
