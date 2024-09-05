@@ -1,24 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import PasswordStrengthMeter from './PasswordStrengthMeter';
 
 const Form = () => {
-    const [password2, setPassword] = useState('')
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         password: ''
     });
     const [formErrors, setFormErrors] = useState({
-        name: false,
-        email: false,
-        password: false
+        name: '',
+        email: '',
+        password: ''
     });
     const inputRef = useRef(null);
 
-    // Focus the first input field (Name) on component load
+    // Focus the first input field 'Name' on component load
     useEffect(() => {
         inputRef.current.focus();
     }, []);
@@ -30,34 +28,41 @@ const Form = () => {
 
     // Validate form inputs
     const validateForm = () => {
-        const errors = {};
+        const errors = { name: '', email: '', password: '' };
         let formIsValid = true;
 
         if (!formData.name.trim()) {
-            errors.name = true;
-            toast.error('Name is required!');
+            errors.name = 'Name is required!';
             formIsValid = false;
         }
 
         if (!formData.email.trim()) {
-            errors.email = true;
-            toast.error('Email is required!');
+            errors.email = 'Email is required!';
             formIsValid = false;
         }
 
         if (!formData.password.trim()) {
-            errors.password = true;
-            toast.error('Password is required!');
+            errors.password = 'Password is required!';
             formIsValid = false;
         }
 
         setFormErrors(errors);
+
         return formIsValid;
     };
+    // Destructure values for easier usage
+    const { name, email, password } = formData;
 
     // Handle form submission
     const handleFormSubmit = (e) => {
         e.preventDefault();
+
+        // Clear previous error messages
+        setFormErrors({
+            name: '',
+            email: '',
+            password: ''
+        });
 
         if (validateForm()) {
             // If form is valid, show success toast and handle form data submission
@@ -67,10 +72,6 @@ const Form = () => {
             setFormData({ name: '', email: '', password: '' });
         }
     };
-
-
-    // Destructure values for easier usage
-    const { name, email, password } = formData;
     return (
         <div className="container d-flex justify-content-center align-items-center vh-100">
             <div className="col-md-6">
@@ -88,6 +89,7 @@ const Form = () => {
                                 onChange={handleChange}
                                 ref={inputRef} // Focus this field on mount
                             />
+                            {formErrors.name && <div className="text-danger">{formErrors.name}</div>}
                         </div>
                         <div className="mb-3">
                             <label htmlFor="email" className="form-label">Email address</label>
@@ -99,6 +101,7 @@ const Form = () => {
                                 value={email}
                                 onChange={handleChange}
                             />
+                            {formErrors.email && <div className="text-danger">{formErrors.email}</div>}
                         </div>
                         <div className="mb-4">
                             <label htmlFor="password" className="form-label">Password</label>
@@ -107,10 +110,14 @@ const Form = () => {
                                 className="form-control shadow-none mb-1"
                                 id="password"
                                 name="password"
-                                value={password2}
-                                onChange={(e) => setPassword(e.target.value)}
+                                value={password}
+                                onChange={handleChange}
                             />
-                            <PasswordStrengthMeter password2={password2} />
+                            {/* Conditionally render the PasswordStrengthMeter */}
+                            {password && (
+                                <PasswordStrengthMeter password={password} />
+                            )}
+                            {formErrors.password && <div className="text-danger">{formErrors.password}</div>}
                         </div>
                         <button type="submit" className="btn btn-primary w-100">Submit</button>
                     </form>

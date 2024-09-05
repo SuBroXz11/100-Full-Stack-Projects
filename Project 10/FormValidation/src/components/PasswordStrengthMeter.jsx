@@ -1,33 +1,33 @@
 import zxcvbn from 'zxcvbn';
 import React from 'react';
 
-const PasswordStrengthMeter = ({ password2 }) => {
-    const testResult = zxcvbn(password2);
+const PasswordStrengthMeter = ({ password }) => {
+    const testResult = zxcvbn(password);
 
-    // Calculate the width for the progress bar
+    // Calculate the width for the progress bar by getting scores as 0 25 75 or 100
     const num = (testResult.score * 100) / 4;
 
     // Function to determine the color of the progress bar
     const handleProgressColor = () => {
         switch (testResult.score) {
             case 0:
-                return '#EA1111'; // red
+                return '#EA1111';
             case 1:
-                return '#FFAD00'; // orange
+                return '#FFAD00';
             case 2:
-                return '#FFAD00'; // yellow
+                return '#FFAD00';
             case 3:
-                return '#9bc158'; // light green
+                return '#9bc158';
             case 4:
-                return '#00b500'; // green
+                return '#00b500';
             default:
-                return '#ddd'; // default color
+                return 'none';
         }
     };
 
     // Function to create the password strength label
     const createPasswordLabel = () => {
-        if (password2 === '') return ''; // Empty when no password is typed
+        if (password === '') return ''; // Empty when no password is typed
         switch (testResult.score) {
             case 0:
                 return 'Very Weak';
@@ -49,7 +49,7 @@ const PasswordStrengthMeter = ({ password2 }) => {
         width: `${num}%`,
         background: handleProgressColor(),
         height: '7px',
-        transition: 'width 0.5s ease' // Smooth transition for the width change
+        transition: 'width 0.5s ease'
     });
 
     return (
