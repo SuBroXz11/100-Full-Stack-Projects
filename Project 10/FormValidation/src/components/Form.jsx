@@ -2,8 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PasswordStrengthMeter from './PasswordStrengthMeter';
 
 const Form = () => {
+    const [password2, setPassword] = useState('')
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -33,16 +35,19 @@ const Form = () => {
 
         if (!formData.name.trim()) {
             errors.name = true;
+            toast.error('Name is required!');
             formIsValid = false;
         }
 
         if (!formData.email.trim()) {
             errors.email = true;
+            toast.error('Email is required!');
             formIsValid = false;
         }
 
         if (!formData.password.trim()) {
             errors.password = true;
+            toast.error('Password is required!');
             formIsValid = false;
         }
 
@@ -56,24 +61,16 @@ const Form = () => {
 
         if (validateForm()) {
             // If form is valid, show success toast and handle form data submission
-            toast.success('Form submitted successfully!', {
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.success('Form submitted successfully!');
             console.log('Form data:', formData);
             // Reset form after submission
             setFormData({ name: '', email: '', password: '' });
         }
     };
 
+
     // Destructure values for easier usage
     const { name, email, password } = formData;
-    const { name: nameError, email: emailError, password: passwordError } = formErrors;
-
     return (
         <div className="container d-flex justify-content-center align-items-center vh-100">
             <div className="col-md-6">
@@ -91,7 +88,6 @@ const Form = () => {
                                 onChange={handleChange}
                                 ref={inputRef} // Focus this field on mount
                             />
-                            {nameError && <p className="text-danger text-sm mt-1">Name is required!</p>}
                         </div>
                         <div className="mb-3">
                             <label htmlFor="email" className="form-label">Email address</label>
@@ -103,19 +99,18 @@ const Form = () => {
                                 value={email}
                                 onChange={handleChange}
                             />
-                            {emailError && <p className="text-danger text-sm mt-1">Email is required!</p>}
                         </div>
                         <div className="mb-4">
                             <label htmlFor="password" className="form-label">Password</label>
                             <input
                                 type="password"
-                                className="form-control"
+                                className="form-control shadow-none mb-1"
                                 id="password"
                                 name="password"
-                                value={password}
-                                onChange={handleChange}
+                                value={password2}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
-                            {passwordError && <p className="text-danger text-sm mt-1">Password is required!</p>}
+                            <PasswordStrengthMeter password2={password2} />
                         </div>
                         <button type="submit" className="btn btn-primary w-100">Submit</button>
                     </form>
