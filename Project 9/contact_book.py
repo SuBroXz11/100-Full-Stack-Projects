@@ -1,9 +1,10 @@
 contact = {}
 
 def display_contact():
-    print("Name\t\tContact Number")
-    for key in contact:
-        print("{}\t\t{}".format(key, contact.get(key)))
+    print("{:<3} {:<20} {:<15}".format("No", "Name", "Contact Number"))
+    print("-" * 38)
+    for index, (name, phone) in enumerate(contact.items(), start=1):
+        print("{:<3} {:<20} {:<15}".format(index, name, phone))
 
 while True:
     print('')
@@ -38,6 +39,9 @@ while True:
             new_contact_name=input("Enter the new contact name: ")
             phone=input("Enter the new phone number: ")
             contact[new_contact_name]=phone
+             # Remove old contact if name changed
+            if new_contact_name != edit_contact:
+                del contact[edit_contact]
             print('Contact updated successfully!')
             display_contact()
         else:
