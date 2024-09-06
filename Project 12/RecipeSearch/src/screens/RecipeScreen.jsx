@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { RecipeCard } from '../components';
+import { RecipeCard, Loader } from '../components';
 
 const RecipeScreen = () => {
     const [data, setData] = useState([]);
@@ -54,8 +54,9 @@ const RecipeScreen = () => {
                 </button>
             </div>
 
+
             {/* Loader Message */}
-            {loading && <p className="text-center mt-4">Loading recipes...</p>}
+            {loading && (<><p className="text-center mt-4">Loading recipes...</p><Loader /></>)}
 
             {/* Recipe Cards */}
             {!loading && data && data.length > 0 ? (
