@@ -38,12 +38,16 @@ const RecipeScreen = () => {
     return (
         <>
             <div className="navbar bg-warning text-warning-content">
-                <div className="flex justify-center w-full">
-                    <button className="btn btn-ghost text-xl text-white font-cursive">
+                <div className="flex w-full">
+                    <button
+                        className="btn btn-ghost text-xl text-white font-cursive"
+                        onClick={() => window.location.reload()}
+                    >
                         RecipeZ App
                     </button>
                 </div>
             </div>
+
 
             <div className="flex justify-center p-4 mt-2">
                 <input
