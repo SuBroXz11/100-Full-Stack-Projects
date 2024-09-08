@@ -1,8 +1,8 @@
 import { nanoid } from 'nanoid';
-import { FaHtml5, FaJs, FaReact } from 'react-icons/fa';
-import img1 from './Screenshot (168).png'
-import img2 from './Screenshot (169).png'
-import img3 from './Screenshot (167).png'
+import { FaHtml5, FaJs, FaReact, FaNodeJs } from 'react-icons/fa';
+import img1 from './assets/images/Screenshot (168).png'
+import img2 from './assets/images/Screenshot (169).png'
+import img3 from './assets/images/Screenshot (167).png'
 
 export const links = [
   { id: nanoid(), href: '#home', text: 'home' },
@@ -29,6 +29,12 @@ export const skills = [
     title: 'React',
     icon: <FaReact className='h-16 w-16 text-emerald-500 animate-spin' />,
     text: 'Advanced proficiency in React, developing efficient and interactive front-end applications with a strong emphasis on component-based architecture.',
+  },
+  {
+    id: nanoid(),
+    title: 'Node JS',
+    icon: <FaNodeJs className='h-16 w-16 text-emerald-500 animate-pulse' />,
+    text: 'Advanced proficiency in Node.js, building scalable and efficient server-side applications with a focus on asynchronous programming and robust API development.'
   },
 ];
 

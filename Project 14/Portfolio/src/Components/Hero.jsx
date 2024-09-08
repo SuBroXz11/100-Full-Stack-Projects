@@ -10,8 +10,8 @@ export default function Hero() {
                     <div className="typewriter">
                         <h1 className="text-5xl lg:text-7xl font-bold tracking-wider ">I'm Subrat...</h1>
                     </div>
-                    <marquee scrollAmount="5" className='mt-4 text-4xl text-slate-700 capitalize tracking-wide'>Front-end-developer</marquee>
-                    <p className='mt-2 text-lg text-slate-700 capitalize tracking-wide font-bold'>Front-end is easy. It’s like riding a bike. Except the bike is on fire, you’re on fire, everything is on fire, and you’re in hell</p>
+                    <marquee scrollAmount="5" className='mt-4 text-4xl text-slate-700 capitalize tracking-wide'>Full Stack Web-Developer</marquee>
+                    <p className='mt-2 text-lg text-slate-700 capitalize tracking-wide font-bold'>A full stack web developer is not just a coder but a creator of digital experiences. They weave together the frontend, backend, and everything in between to bring ideas to life on the web.”</p>
                     <div className="flex gap-x-4 md:gap-x-6 lg:gap-x-8 mt-4">
                         <a href="https://github.com/SuBroXz11" target='blank' className='bounce2'>
                             <FaGithubSquare className='h-8 w-8 md:h-10 md:w-10 lg:h-12 lg:w-12  text-slate-600 hover:text-black duration-700' />
