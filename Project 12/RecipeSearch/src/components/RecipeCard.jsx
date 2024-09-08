@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom'
 const RecipeCard = ({ detail }) => {
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-6 py-4">
@@ -14,9 +15,9 @@ const RecipeCard = ({ detail }) => {
                         <h2 className="card-title">{recipe.strMeal}</h2>
                         <p>{recipe.strArea ? `Cuisine: ${recipe.strArea}` : 'Cuisine Info Unavailable'}</p>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-warning w-32 rounded-full transition-transform duration-300 hover:scale-105 hover:bg-yellow-600 hover:text-white">
+                            <NavLink to={`/recipe/${recipe.idMeal}`} className="btn btn-warning w-32 rounded-full transition-transform duration-300 hover:scale-105 hover:bg-yellow-600 hover:text-white">
                                 Recipe
-                            </button>
+                            </NavLink>
                         </div>
                     </div>
                 </div>
