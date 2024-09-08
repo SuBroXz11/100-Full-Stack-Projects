@@ -1,8 +1,8 @@
 import { nanoid } from 'nanoid';
 import { FaHtml5, FaJs, FaReact, FaNodeJs } from 'react-icons/fa';
-import img1 from './assets/images/Screenshot (168).png'
-import img2 from './assets/images/Screenshot (169).png'
-import img3 from './assets/images/Screenshot (167).png'
+import img1 from './assets/images/Screenshot (253).png'
+import img2 from './assets/images/Screenshot (255).png'
+import img3 from './assets/images/Screenshot (254).png'
 
 export const links = [
   { id: nanoid(), href: '#home', text: 'home' },
@@ -42,25 +42,25 @@ export const projects = [
   {
     id: nanoid(),
     img: img3,
-    url: 'https://subroxz-color-generator.netlify.app/',
+    url: 'https://subroxz-ecom.netlify.app/',
     github: 'https://github.com/SuBroXz11',
-    title: 'first project',
-    text: 'This is the project where i started using different libraries in my project and map and filter though their properties. This made my base...',
+    title: 'Front-end Ecommerce Project',
+    text: 'This is the project where i learnt to use tutorial APIs for CRUDs and AUthentication',
   },
   {
     id: nanoid(),
     img: img2,
-    url: 'https://subroxz-todo.netlify.app/',
+    url: 'https://subroxz-prompt.vercel.app/',
     github: 'https://github.com/SuBroXz11',
-    title: 'second project',
-    text: 'This is the project where i learned the Basic create update and deletion of the frontend data and saving the data in the Local storage...',
+    title: 'Next JS Blog Project',
+    text: 'This is the project where i learnt google authentication with next js and mongoDB for database',
   },
   {
     id: nanoid(),
     img: img1,
-    url: 'https://subrat-karmacharya.netlify.app/',
+    url: 'https://subroxz-shop.onrender.com/',
     github: 'https://github.com/SuBroXz11',
-    title: 'third project',
-    text: 'This is an Unsplash Images API project where I used Axios react-router-dom and react query. It was the first API project I did as a beginner in react...'
+    title: 'Full Stack Ecommerce Project',
+    text: 'This is the project where i learnt the most about a big web application with admin functionality'
   },
 ];
