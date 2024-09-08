@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams, NavLink } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Loader } from '../components';
 
 const RecipeDetailScreen = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
+    // using useParams to get the id from the url
     const { id } = useParams();
 
     const getInfo = async () => {

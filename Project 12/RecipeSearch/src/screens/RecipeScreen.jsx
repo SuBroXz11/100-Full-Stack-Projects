@@ -40,7 +40,7 @@ const RecipeScreen = () => {
             <div className="navbar bg-warning text-warning-content">
                 <div className="flex justify-center w-full">
                     <button
-                        className="btn btn-ghost text-xl text-white font-cursive text-3xl"
+                        className="btn btn-ghost text-white font-cursive text-3xl"
                         onClick={() => window.location.reload()}
                     >
                         Recipe App
