@@ -21,7 +21,7 @@ class Menu:
         with open(os.path.join(os.path.dirname(__file__), "blog_data.txt"), "w") as f:
             # Convert each Post object to a dictionary and then to a JSON string
             for post in self.posts:
-                f.write(json.dumps(post.to_dict()) + "\n")
+                f.write(json.dumps(post.to_dict()) + "\n\n")
 
     # Create a new post by prompting for the title, content, and author
     def create_post(self):
@@ -41,6 +41,7 @@ class Menu:
         else:
             for idx, post in enumerate(self.posts, start=1):
                 print(f"Post {idx}: {post}")  # Print each post, using the __str__ method of Post
+                print('') # for spacing between the blogs
 
     # Update an existing post by selecting it by its number and changing the title/content
     def update_post(self):
