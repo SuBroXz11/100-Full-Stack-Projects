@@ -4,4 +4,4 @@
 
 Program instructions:
 
-1. Run the program blog.py for starting the program
+1. Run blog.py for starting the program
