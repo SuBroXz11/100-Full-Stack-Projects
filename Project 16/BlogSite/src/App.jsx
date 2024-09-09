@@ -1,11 +1,14 @@
-import React from 'react'
-
-const App = () => {
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BlogDetailScreen, BlogScreen } from './screens';
+export default function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<BlogScreen />} />
+          <Route path="/blog/:id" element={<BlogDetailScreen />} />
+        </Routes>
+      </Router>
+    </>
   )
 }
-
-export default App
