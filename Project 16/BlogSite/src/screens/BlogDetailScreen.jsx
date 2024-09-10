@@ -15,7 +15,7 @@ const BlogDetailScreen = () => {
             const data = response.data.articles || [];
             // Find the specific blog by id
             setBlog(data[id]);
-            console.log(blog);
+            // console.log(blog);
 
         } catch (error) {
             console.error("Error fetching the blog data:", error);
