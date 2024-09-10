@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Card = ({ id, image, isFlipped, onClick }) => {
     return (
         <div
