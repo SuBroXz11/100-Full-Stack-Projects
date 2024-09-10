@@ -1,5 +1,5 @@
 !!!
-THE SITE IS ALREADY DEPLOYED AT https://project-8-subroxz.netlify.app/ IF YOU WANT A PREVIEW
+UNFORTUNATELY THIS SITE COULD NOT BE DEPLOYED BECAUSE THE API SAID UPGRADE REQUIRED MOST LIKELY ASKING FOR PAID API KEY
 !!!
 
 Project Description: 16. Blog Frontend (React) : Frontend for a blog site that displays posts fetched from a JSON file or an API.
