@@ -1,3 +1,3 @@
-# Project Description: 17. Blog 17. Simple Quiz (Python)
+# Project Description: 17. Simple Quiz (Python)
 
 17. command-line quiz application with multiple-choice questions
