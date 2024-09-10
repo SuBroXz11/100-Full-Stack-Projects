@@ -16,7 +16,7 @@ const BlogCard = ({ blogs }) => {
                             <p className="text-sm text-gray-500">By: {blog.author}</p>
                             <p className="text-sm text-gray-500">Published at: {new Date(blog.publishedAt).toLocaleDateString()}</p>
                             <div className="card-actions justify-end">
-                                <NavLink to={`/blogs/${index}`} className="btn btn-primary text-white">
+                                <NavLink to={`/blog/${index}`} className="btn btn-primary text-white">
                                     Read More
                                 </NavLink>
                             </div>

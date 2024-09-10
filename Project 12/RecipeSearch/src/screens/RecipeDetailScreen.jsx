@@ -1,71 +1,68 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams, NavLink } from 'react-router-dom';
 import axios from 'axios';
-import { useParams } from "react-router-dom";
-import { Loader } from '../components';
 
-const RecipeDetailScreen = () => {
-    const [data, setData] = useState([]);
+const BlogDetailScreen = () => {
+    const { id } = useParams(); // Get the blog id from the URL
+    const [blog, setBlog] = useState(null);
     const [loading, setLoading] = useState(false);
-    // using useParams to get the id from the url
-    const { id } = useParams();
 
-    const getInfo = async () => {
+    // Function to fetch blog data
+    const getBlog = async () => {
         setLoading(true);
         try {
-            const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
-            setData(response.data.meals || []);
+            const response = await axios.get(`https://newsapi.org/v2/everything?domains=wsj.com&apiKey=${import.meta.env.VITE_API_KEY}`);
+            const data = response.data.articles || [];
+            setBlog(data[id]); // Find the specific blog by id
         } catch (error) {
-            console.error("There was an error fetching the data:", error);
+            console.error("Error fetching the blog data:", error);
         } finally {
             setLoading(false);
         }
     };
 
+    // Fetch the blog data on component mount
     useEffect(() => {
-        getInfo();
+        getBlog();
     }, [id]);
 
-    // Set the document title to the name of the recipe
-    useEffect(() => {
-        if (data.length > 0) {
-            document.title = data[0].strMeal;
-        }
-    }, [data]);
-
     if (loading) {
-        return <div className="flex justify-center items-center h-screen bg-yellow-100"><Loader /></div>;
+        return <p>Loading...</p>;
+    }
+
+    if (!blog) {
+        return <p>Blog not found</p>;
     }
 
     return (
-        <div className="container mx-auto p-6 h-screen bg-yellow-50">
+        <div className="container mx-auto p-4">
+            {/* Back to Home Button */}
+            <div className="flex justify-end">
+                <NavLink to="/" className="btn btn-outline btn-primary">
+                    Back to Home
+                </NavLink>
+            </div>
 
-            {data.length > 0 ? (
-                data.map((recipe) => (
+            {/* Blog Content */}
+            <div className="mt-4 card w-full bg-base-100 shadow-xl">
+                <figure>
+                    <img src={blog.urlToImage || 'https://via.placeholder.com/150'} alt={blog.title} className="w-full h-96 object-cover" />
+                </figure>
+                <div className="card-body">
+                    <h1 className="card-title text-4xl font-bold">{blog.title}</h1>
+                    <p className="text-gray-500 mb-2">By: <span className="font-semibold">{blog.author || 'Unknown'}</span></p>
+                    <p className="text-gray-500 mb-2">Published on: {new Date(blog.publishedAt).toLocaleDateString()}</p>
+                    <p className="text-gray-500 mb-2">Source: <a href={blog.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">{blog.source.name}</a></p>
 
-                    <div key={recipe.idMeal} className="card lg:card-side bg-yellow-100 shadow-xl mb-8">
-                        <figure className="lg:w-1/3">
-                            <img src={recipe.strMealThumb} alt={recipe.strMeal} className="w-full h-auto rounded-lg" />
-                        </figure>
-                        <div className="card-body lg:w-2/3">
-                            <h2 className="card-title text-2xl font-bold text-yellow-800">{recipe.strMeal}</h2>
-                            <p><span className="font-semibold">Category:</span> {recipe.strCategory}</p>
-                            <p><span className="font-semibold">Cuisine:</span> {recipe.strArea}</p>
-                            <p className="font-semibold mt-4">Ingredients:</p>
-                            <ul className="list-disc list-inside pl-5">
-                                {Object.keys(recipe).filter(key => key.startsWith('strIngredient') && recipe[key]).map((ingredientKey, index) => (
-                                    <li key={index}>{recipe[ingredientKey]} {recipe[`strMeasure${ingredientKey.slice(13)}`]}</li>
-                                ))}
-                            </ul>
-                            <p className="font-semibold mt-4">Instructions:</p>
-                            <p className="text-justify">{recipe.strInstructions}</p>
-                        </div>
-                    </div>
-                ))
-            ) : (
-                <p className="text-center text-lg">No recipe found.</p>
-            )}
+                    {/* Description */}
+                    <p className="mt-4 text-lg">{blog.description || 'No description available'}</p>
+
+                    {/* Content */}
+                    <p className="mt-6">{blog.content || 'No content available'}</p>
+                </div>
+            </div>
         </div>
     );
 };
 
-export default RecipeDetailScreen;
+export default BlogDetailScreen;
