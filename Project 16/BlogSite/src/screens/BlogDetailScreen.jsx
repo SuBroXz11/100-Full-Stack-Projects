@@ -13,7 +13,10 @@ const BlogDetailScreen = () => {
         try {
             const response = await axios.get(`https://newsapi.org/v2/everything?domains=wsj.com&apiKey=${import.meta.env.VITE_API_KEY}`);
             const data = response.data.articles || [];
-            setBlog(data[id]); // Find the specific blog by id
+            // Find the specific blog by id
+            setBlog(data[id]);
+            // console.log(blog);
+
         } catch (error) {
             console.error("Error fetching the blog data:", error);
         } finally {
@@ -46,19 +49,13 @@ const BlogDetailScreen = () => {
             {/* Blog Content */}
             <div className="mt-4 card w-full bg-base-100 shadow-xl">
                 <figure>
-                    <img src={blog.urlToImage || 'https://via.placeholder.com/150'} alt={blog.title} className="w-full h-96 object-cover" />
+                    <img src={blog.urlToImage || 'https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Gemini_SS.width-1300.jpg'} alt={blog.title} className="w-full h-96 object-cover" />
                 </figure>
                 <div className="card-body">
                     <h1 className="card-title text-4xl font-bold">{blog.title}</h1>
-                    <p className="text-gray-500 mb-2">By: <span className="font-semibold">{blog.author || 'Unknown'}</span></p>
-                    <p className="text-gray-500 mb-2">Published on: {new Date(blog.publishedAt).toLocaleDateString()}</p>
-                    <p className="text-gray-500 mb-2">Source: <a href={blog.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">{blog.source.name}</a></p>
-
-                    {/* Description */}
-                    <p className="mt-4 text-lg">{blog.description || 'No description available'}</p>
-
-                    {/* Content */}
-                    <p className="mt-6">{blog.content || 'No content available'}</p>
+                    <p className="text-gray-500">By: {blog.author}</p>
+                    <p className="text-gray-500">Published at: {new Date(blog.publishedAt).toLocaleDateString()}</p>
+                    <p className="mt-4">{blog.content}</p>
                 </div>
             </div>
         </div>
