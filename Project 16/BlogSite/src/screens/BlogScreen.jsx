@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Footer, Hero, Navbar } from "../components"
+import { BlogCard, Footer, Hero, Navbar } from "../components"
 
 const BlogScreen = () => {
     const [data, setData] = useState([]);
@@ -10,7 +10,7 @@ const BlogScreen = () => {
         try {
             const response = await axios.get(`https://newsapi.org/v2/everything?domains=wsj.com&apiKey=${import.meta.env.VITE_API_KEY}`);
             setData(response.data.articles || []); // Set data or empty array if no meals found
-            console.log(data);
+            // console.log(data);
 
         } catch (error) {
             console.error("There was an error fetching the data:", error);
@@ -27,6 +27,7 @@ const BlogScreen = () => {
                 <Navbar />
                 <div className="flex-grow">
                     <Hero />
+                    <BlogCard blogs={data} />
                 </div>
                 <Footer />
             </div>
