@@ -1,5 +1,5 @@
 !!!
-THE SITE IS ALREADY DEPLOYED AT https://project-22-subroxz.netlify.app/ IF YOU WANT A PREVIEW
+THE SITE IS ALREADY DEPLOYED AT https://project-22-subrat.netlify.app/ IF YOU WANT A PREVIEW
 !!!
 
 ---
