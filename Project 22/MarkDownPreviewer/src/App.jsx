@@ -1,9 +1,9 @@
-import React from 'react'
+import MarkDown from "./components/MarkDown"
 
 const App = () => {
   return (
     <div>
-      Hello world
+      <MarkDown />
     </div>
   )
 }
