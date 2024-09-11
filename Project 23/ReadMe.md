@@ -5,4 +5,3 @@
 - HOW TO USE THE APP
 
 1. RUN THE `main.py` file
-2. IT WILL CREATE expenses.txt file which will store all the data
