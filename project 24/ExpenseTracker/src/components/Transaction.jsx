@@ -1,8 +1,6 @@
 import React from 'react'
 
-const Transaction = ({ transaction, id }) => {
-    // console.log(transaction);
-
+const Transaction = ({ transaction, id, deleteTransaction }) => {
     return (
         <div
             className="card bg-base-100 shadow-md flex justify-between items-center p-4 relative w-96" key={id}>
@@ -23,6 +21,7 @@ const Transaction = ({ transaction, id }) => {
                     }`}
             ></div>
             <button
+                onClick={() => deleteTransaction(transaction.id)}
                 className="btn btn-error btn-sm absolute bottom-3 right-3"
             >
                 Delete

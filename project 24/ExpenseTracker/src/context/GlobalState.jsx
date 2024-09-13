@@ -7,6 +7,7 @@ const initialState = {
         { id: 1, text: 'Transaction 1', amount: 255 },
         { id: 2, text: 'Transaction 2', amount: -500 },
         { id: 3, text: 'Transaction 3', amount: 700 },
+        { id: 4, text: 'Momo', amount: -130 },
     ]
 }
 
@@ -16,9 +17,15 @@ export const GlobalContext = createContext(initialState);
 // Provider
 export const GlobalProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AppReducer, initialState);
+
+    // Actions
+    function deleteTransaction(id) {
+        dispatch({ type: 'DELETE_TRANSACTION', payload: id });
+    }
+
     return (
         <GlobalContext.Provider
-            value={{ transactions: state.transactions }}
+            value={{ transactions: state.transactions, deleteTransaction }}
         >
             {children}
         </GlobalContext.Provider>

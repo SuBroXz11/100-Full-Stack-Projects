@@ -3,7 +3,8 @@ import { GlobalContext } from '../context/GlobalState';
 import Transaction from './Transaction';
 
 const TransactionList = () => {
-    const { transactions } = useContext(GlobalContext);
+    const { transactions, deleteTransaction } = useContext(GlobalContext);
+
     return (
         <div className="mb-5">
             <div className="header">
@@ -13,7 +14,7 @@ const TransactionList = () => {
             {transactions ? (
                 <div className="mt-3 space-y-3">
                     {transactions.map((transaction, id) => {
-                        return (<Transaction transaction={transaction} id={id} key={id} />)
+                        return (<Transaction transaction={transaction} id={id} key={id} deleteTransaction={deleteTransaction} />)
                     })}
 
                 </div>
