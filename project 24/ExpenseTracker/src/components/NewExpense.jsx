@@ -6,7 +6,6 @@ const NewExpense = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log({ text, amount });
-        // Handle the transaction logic here
     };
     return (
         <div className="max-w-md mx-auto p-4 shadow-lg rounded-md">
