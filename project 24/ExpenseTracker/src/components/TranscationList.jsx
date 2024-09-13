@@ -11,7 +11,7 @@ const TransactionList = () => {
                 <h1 className="text-xl">History</h1>
                 <hr className="mt-2" />
             </div>
-            {transactions ? (
+            {transactions.length > 0 ? (
                 <div className="mt-3 space-y-3">
                     {transactions.map((transaction, id) => {
                         return (<Transaction transaction={transaction} id={id} key={id} deleteTransaction={deleteTransaction} />)
