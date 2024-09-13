@@ -4,7 +4,7 @@ const Balance = () => {
             <h1 className="text-xl">Your Balance</h1>
             <h1 className="text-2xl">$ 260.00</h1>
             <div className="card bg-neutral text-neutral-content w-96 mt-3">
-                <div className="card-body text-center">
+                <div className="card-body text-center p-0">
                     <div className="flex w-full divide-x divide-gray-300">
                         <div className="w-1/2 p-6">
                             <h2 className="text-xl font-bold">Income</h2>
