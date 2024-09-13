@@ -8,11 +8,12 @@ const NewTransaction = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const newTransaction = {
-            id: Math.floor(Math.random() * 10000000),
+            id: Math.floor(Math.random() * 10000000), // generating random id 
             text,
-            amount: +amount
+            amount: +amount // converting amount to number
         }
         addTransaction(newTransaction)
+        // clearing up the input fields after submission
         setAmount('');
         setText('')
     };
