@@ -1,6 +1,6 @@
 const Balance = () => {
     return (
-        <div>
+        <div className="mb-5">
             <h1 className="text-xl">Your Balance</h1>
             <h1 className="text-2xl">$ 260.00</h1>
             <div className="card bg-neutral text-neutral-content w-96 mt-3">
