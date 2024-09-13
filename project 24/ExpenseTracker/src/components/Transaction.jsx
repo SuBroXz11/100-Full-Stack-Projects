@@ -1,6 +1,8 @@
 import React from 'react'
 
 const Transaction = ({ transaction, id, deleteTransaction }) => {
+    // console.log(transaction);
+
     return (
         <div
             className="card bg-base-100 shadow-md flex justify-between items-center p-4 relative w-96" key={id}>

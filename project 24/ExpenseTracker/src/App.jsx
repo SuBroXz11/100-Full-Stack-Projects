@@ -1,4 +1,4 @@
-import { Balance, TransactionList, NewExpense } from './components';
+import { Balance, TransactionList, NewTransaction } from './components';
 import { GlobalProvider } from './context/GlobalState';
 
 const App = () => {
@@ -11,7 +11,7 @@ const App = () => {
         <div className="components mt-5 border p-6">
           <Balance />
           <TransactionList />
-          <NewExpense />
+          <NewTransaction />
         </div>
       </div>
     </GlobalProvider>

@@ -1,11 +1,20 @@
-import { useState } from "react";
-const NewExpense = () => {
+import { useState, useContext } from "react";
+import { GlobalContext } from "../context/GlobalState";
+const NewTransaction = () => {
     const [text, setText] = useState('');
     const [amount, setAmount] = useState('');
+    const { addTransaction } = useContext(GlobalContext)
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log({ text, amount });
+        const newTransaction = {
+            id: Math.floor(Math.random() * 10000000),
+            text,
+            amount: +amount
+        }
+        addTransaction(newTransaction)
+        setAmount('');
+        setText('')
     };
     return (
         <div className="max-w-md mx-auto p-4 shadow-lg rounded-md">
@@ -48,4 +57,4 @@ const NewExpense = () => {
     );
 };
 
-export default NewExpense;
+export default NewTransaction;
