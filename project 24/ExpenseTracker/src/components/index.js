@@ -1,3 +1,3 @@
 export { default as Balance } from "./Balance";
-export { default as History } from "./History";
+export { default as TransactionList } from "./TranscationList";
 export { default as NewExpense } from "./NewExpense";

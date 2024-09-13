@@ -1,17 +1,20 @@
-import { Balance, History, NewExpense } from './components';
+import { Balance, TransactionList, NewExpense } from './components';
+import { GlobalProvider } from './context/GlobalState';
 
 const App = () => {
   return (
-    <div className="flex flex-col items-center justify-center">
-      <div className="mt-5 text-2xl text-white animate-pulse">
-        Expense Tracker
+    <GlobalProvider>
+      <div className="flex flex-col items-center justify-center">
+        <div className="mt-5 text-2xl text-white animate-pulse">
+          Expense Tracker
+        </div>
+        <div className="components mt-5 border p-6">
+          <Balance />
+          <TransactionList />
+          <NewExpense />
+        </div>
       </div>
-      <div className="components mt-5 border p-6">
-        <Balance />
-        <History />
-        <NewExpense />
-      </div>
-    </div>
+    </GlobalProvider>
   );
 }
 
