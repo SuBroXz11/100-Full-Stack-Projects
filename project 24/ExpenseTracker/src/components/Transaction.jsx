@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Transaction = ({ transaction, id }) => {
-    console.log(transaction);
+    // console.log(transaction);
 
     return (
         <div
