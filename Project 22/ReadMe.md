@@ -4,7 +4,7 @@ THE SITE IS ALREADY DEPLOYED AT https://project-22-subrat.netlify.app/ IF YOU WA
 
 ---
 
-Project Description: project-22-subroxz: React app that converts Markdown text to HTML and displays it in real-time.
+Project Description: 22. Markdown Previewer (React): React app that converts Markdown text to HTML and displays it in real-time.
 
 - TO RUN THIS PROJECT
   -YOU MAY JUST CLONE THE REPO OR PULL THE LATEST CHANGES FROM THE EXISTING MAIN BRANCH...
