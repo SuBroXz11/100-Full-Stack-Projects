@@ -17,10 +17,18 @@ def armstrong(n):
         
     if(sum == copy_n):
         print(f"{copy_n} is an armstrong")
-        return "True"
+        # python dictionary result
+        result = {
+            "Number":copy_n,
+            "Armstrong":True
+        }
     else:
         print(f"{copy_n} is not an armstrong number")
-        return "False"
+        result = {
+            "Number":copy_n,
+            "Armstrong":False
+        }
+    return jsonify(result)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080) # port manually added because default was showing bug
