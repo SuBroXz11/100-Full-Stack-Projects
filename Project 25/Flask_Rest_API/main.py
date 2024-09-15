@@ -14,6 +14,14 @@ books=[
 def get_books():
     return jsonify(books)
 
+#  get book by id
+@app.route('/books/<int:book_id>', methods=['GET'])
+def get_book_by_id(book_id):
+    for book in books:
+        if book['id']==book_id:
+            return book
+    return {'error': 'Book not found'}
+
 if __name__ == '__main__':
     app.run(debug=True, port=8080) # port manually added because default was showing bug
 
