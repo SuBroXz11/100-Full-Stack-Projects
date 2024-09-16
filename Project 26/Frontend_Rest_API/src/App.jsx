@@ -1,9 +1,9 @@
-import React from 'react'
+import BooksQNA from "./components/BooksQNA"
 
 const App = () => {
   return (
-    <div>
-      <h1 className="text-5xl">Hello world</h1>
+    <div className="flex justify-center items-center h-screen">
+      <BooksQNA />
     </div>
   )
 }
