@@ -9,6 +9,22 @@ books=[
     {"id":3, "title": "Book3", "author": "Author3"},
 ]
 
+# landing page
+@app.route('/')
+def landing_page():
+    return ''' <h1>Welcome to the Book API</h1>
+                <h2>Below are the end points you can explore</h2>
+                <h3API Endpoints <h3/> 
+                <ul>
+                <li>GET /books:    Returns a list of all books</li>
+                <li> GET /books/{id}   : Returns a book by id</li>
+                <li>POST /books   : Creates a new book</li>
+                <li>PUT /books/{id}   : Updates a book by id</li>
+                <li>DELETE /books/{id}   : Deletes a book by id</li>
+                <ul/>'''
+
+
+
 #  Get all books
 @app.route('/books', methods=['GET'])
 def get_books():
