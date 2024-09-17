@@ -2,15 +2,15 @@ import { useState, useEffect } from "react"
 import axios from 'axios'
 
 const BooksQNA = () => {
-    // Sample API data
     const [books, setBooks] = useState([])
     const [loading, setLoading] = useState(false);
-    const getBlog = async () => {
+    const getBooks = async () => {
         setLoading(true);
         try {
             const response = await axios.get('http://127.0.0.1:8080/books');
             const data = response.data || [];
-            console.log(data);
+            // console.log(data);
+            setBooks(data)
         } catch (error) {
             console.error("Error fetching the blog data:", error);
         } finally {
@@ -19,14 +19,7 @@ const BooksQNA = () => {
     };
 
     useEffect(() => {
-        // Simulating an API call
-        const apiData = [
-            { "author": "Author1", "id": 1, "title": "Book1" },
-            { "author": "Author2", "id": 2, "title": "Book2" },
-            { "author": "Author3", "id": 3, "title": "Book3" }
-        ]
-        getBlog();
-        setBooks(apiData)
+        getBooks();
     }, [])
 
     return (
