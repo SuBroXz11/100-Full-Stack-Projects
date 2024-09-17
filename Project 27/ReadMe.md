@@ -7,3 +7,9 @@
 - PROJECT FEATURES
 
 * USES `requests` MODULE TO FETCH DATA FROM THE OPEN WEATHER API
+
+---
+
+- HOW TO RUN THIS PROJECT
+
+1. RUN THE COMMAND `python weather.py location` IN YOUR TERMINAL E.G. `python weather.py kathmandu`
