@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs';
+import { toast } from 'react-toastify';
 
 const Signup = () => {
     const [username, setUsername] = useState('');
@@ -14,7 +15,7 @@ const Signup = () => {
 
         // Check if user already exists
         if (users.find(user => user.email === email)) {
-            alert('User already exists');
+            toast.error('User already exists');
             return;
         }
 
@@ -25,6 +26,7 @@ const Signup = () => {
         users.push({ username, email, password: hashedPassword });
         localStorage.setItem('users', JSON.stringify(users));
         navigate('/login');
+        toast.success('Signup Complete! Please login to continue...')
     };
 
     return (

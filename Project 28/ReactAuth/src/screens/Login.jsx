@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs';
+import { toast } from 'react-toastify';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -15,10 +16,11 @@ const Login = () => {
         if (user && await bcrypt.compare(password, user.password)) {
             localStorage.setItem('loggedIn', 'true');
             localStorage.setItem('currentUser', JSON.stringify(user));
-            navigate('/dashboard');
             window.location.reload();
+            navigate('/dashboard');
+            toast.success('Login Successful...')
         } else {
-            alert('Invalid email or password');
+            toast.error('Invalid email or password');
         }
     };
 
