@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import bcrypt from 'bcryptjs';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const users = JSON.parse(localStorage.getItem('users')) || [];
-        const user = users.find(user => user.email === email && user.password === password);
-        if (user) {
+        const user = users.find(user => user.email === email);
+
+        if (user && await bcrypt.compare(password, user.password)) {
             localStorage.setItem('loggedIn', 'true');
             localStorage.setItem('currentUser', JSON.stringify(user));
             navigate('/dashboard');
