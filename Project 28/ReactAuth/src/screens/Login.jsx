@@ -1,55 +1,51 @@
 import React, { useState } from 'react';
-import bcrypt from 'bcryptjs';
-import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    const [formData, setFormData] = useState({ email: '', password: '' });
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
-    const handleLogin = () => {
-        const storedUser = JSON.parse(localStorage.getItem('user'));
-        if (storedUser && formData.email === storedUser.email) {
-            if (bcrypt.compareSync(formData.password, storedUser.password)) {
-                toast.success('Login successful!');
-                localStorage.setItem('loggedInUser', storedUser.username);
-                navigate('/dashboard');
-            } else {
-                toast.error('Invalid password!');
-            }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const user = users.find(user => user.email === email && user.password === password);
+        if (user) {
+            localStorage.setItem('loggedIn', 'true');
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            navigate('/dashboard');
+            window.location.reload();
         } else {
-            toast.error('User not found!');
+            alert('Invalid email or password');
         }
     };
 
     return (
-        <div className="flex justify-center items-center h-screen">
-            <div className="card w-96 bg-base-100 shadow-xl">
-                <div className="card-body">
-                    <h2 className="card-title">Login</h2>
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+            <div className="p-6 bg-white rounded-lg shadow-md w-80">
+                <h2 className="text-xl font-bold mb-4">Login</h2>
+                <form onSubmit={handleSubmit} className="space-y-4">
                     <input
                         type="email"
                         placeholder="Email"
-                        name="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         className="input input-bordered w-full"
-                        onChange={handleInputChange}
+                        required
                     />
                     <input
                         type="password"
                         placeholder="Password"
-                        name="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         className="input input-bordered w-full"
-                        onChange={handleInputChange}
+                        required
                     />
-                    <button className="btn btn-primary mt-4" onClick={handleLogin}>
-                        Login
-                    </button>
-                </div>
+                    <button type="submit" className="btn btn-primary w-full">Login</button>
+                </form>
+                <p className="mt-4">
+                    Don't have an account? <Link to="/signup" className="text-blue-500">Sign Up</Link>
+                </p>
             </div>
         </div>
     );

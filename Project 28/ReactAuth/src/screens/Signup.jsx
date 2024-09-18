@@ -1,63 +1,58 @@
 import React, { useState } from 'react';
-import bcrypt from 'bcryptjs';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 
 const Signup = () => {
-    const [formData, setFormData] = useState({ username: '', email: '', password: '' });
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
-    const handleSignup = () => {
-        if (formData.username && formData.email && formData.password) {
-            const hashedPassword = bcrypt.hashSync(formData.password, 10);
-            const userData = { ...formData, password: hashedPassword };
-
-            // Save the user data to a .json file (this would require a backend in practice)
-            localStorage.setItem('user', JSON.stringify(userData));
-            toast.success('User registered successfully!');
-            navigate('/login');
-        } else {
-            toast.error('All fields are required!');
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        if (users.find(user => user.email === email)) {
+            alert('User already exists');
+            return;
         }
+        users.push({ username, email, password });
+        localStorage.setItem('users', JSON.stringify(users));
+        navigate('/login');
     };
 
     return (
-        <div className="flex justify-center items-center h-screen">
-            <div className="card w-96 bg-base-100 shadow-xl">
-                <div className="card-body">
-                    <h2 className="card-title">Sign Up</h2>
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+            <div className="p-6 bg-white rounded-lg shadow-md w-80">
+                <h2 className="text-xl font-bold mb-4">Sign Up</h2>
+                <form onSubmit={handleSubmit} className="space-y-4">
                     <input
                         type="text"
                         placeholder="Username"
-                        name="username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                         className="input input-bordered w-full"
-                        onChange={handleInputChange}
+                        required
                     />
                     <input
                         type="email"
                         placeholder="Email"
-                        name="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         className="input input-bordered w-full"
-                        onChange={handleInputChange}
+                        required
                     />
                     <input
                         type="password"
                         placeholder="Password"
-                        name="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         className="input input-bordered w-full"
-                        onChange={handleInputChange}
+                        required
                     />
-                    <button className="btn btn-primary mt-4" onClick={handleSignup}>
-                        Sign Up
-                    </button>
-                </div>
+                    <button type="submit" className="btn btn-primary w-full">Sign Up</button>
+                </form>
+                <p className="mt-4">
+                    Already have an account? <Link to="/login" className="text-blue-500">Login</Link>
+                </p>
             </div>
         </div>
     );
