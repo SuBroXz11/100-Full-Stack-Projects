@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -13,6 +13,10 @@ const Dashboard = () => {
         window.location.reload();
         navigate('/login');
     };
+
+    useEffect(() => {
+        document.title = "Dashboard";
+    }, []);
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">

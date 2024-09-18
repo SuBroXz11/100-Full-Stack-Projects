@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs';
 import { toast } from 'react-toastify';
@@ -8,6 +8,10 @@ const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+
+    useEffect(() => {
+        document.title = "Signup Page";
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
