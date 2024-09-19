@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -8,9 +9,14 @@ const Dashboard = () => {
     const handleLogout = () => {
         localStorage.removeItem('loggedIn');
         localStorage.removeItem('currentUser');
-        navigate('/login');
+        toast.success('Logout Successful...')
         window.location.reload();
+        navigate('/login');
     };
+
+    useEffect(() => {
+        document.title = "Dashboard";
+    }, []);
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">

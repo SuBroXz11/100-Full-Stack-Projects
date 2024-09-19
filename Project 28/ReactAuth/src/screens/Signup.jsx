@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import bcrypt from 'bcryptjs';
+import { toast } from 'react-toastify';
 
 const Signup = () => {
     const [username, setUsername] = useState('');
@@ -7,16 +9,28 @@ const Signup = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    useEffect(() => {
+        document.title = "Signup Page";
+    }, []);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const users = JSON.parse(localStorage.getItem('users')) || [];
+
+        // Check if user already exists
         if (users.find(user => user.email === email)) {
-            alert('User already exists');
+            toast.error('User already exists');
             return;
         }
-        users.push({ username, email, password });
+
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Store the new user with hashed password
+        users.push({ username, email, password: hashedPassword });
         localStorage.setItem('users', JSON.stringify(users));
         navigate('/login');
+        toast.success('Signup Complete! Please login to continue...')
     };
 
     return (
