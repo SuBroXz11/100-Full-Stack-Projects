@@ -2,6 +2,7 @@ import { useState, useRef } from 'react'
 import { Auth } from './components/Auth'
 
 import Cookies from 'universal-cookie'
+import { Chat } from './components/Chat'
 const cookies = new Cookies()
 
 const App = () => {
@@ -18,7 +19,7 @@ const App = () => {
   return (
     <div>
       {room ? (
-        <div>Chat</div>
+        <Chat />
       ) : (
         <div className="room">
           <label htmlFor="">Enter Room Name: </label>
