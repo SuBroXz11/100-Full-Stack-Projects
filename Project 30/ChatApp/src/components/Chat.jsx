@@ -4,13 +4,19 @@ import { auth, db } from '../firebase-config'
 
 export const Chat = ({ room }) => {
     const [newMessage, setNewMessage] = useState("");
+    const [messages, setMessages] = useState([]);
     const messagesRef = collection(db, "messages");
 
     useEffect(() => {
         const queryMessages = query(messagesRef, where("room", "==", room))
-        onSnapshot(queryMessages, (snapshot) => {
-            console.log("NEW MESSAGE!");
+        const unsubscribe = onSnapshot(queryMessages, (snapshot) => {
+            let messages = [];
+            snapshot.forEach((doc) => {
+                messages.push({ ...doc.data(), id: doc.id })
+            })
+            setMessages(messages)
         })
+        return () => unsubscribe()
     }, [])
 
     const handleSubmit = async (e) => {
@@ -27,6 +33,11 @@ export const Chat = ({ room }) => {
     }
     return (
         <div className="chat-app">
+            <div>
+                {messages.map((message) => (
+                    <h1>{message.text}</h1>
+                ))}
+            </div>
             <form className="new-message-form" onSubmit={handleSubmit}>
                 <input type="text" className="new-message-input"
                     placeholder="Type your message here..."
