@@ -1,16 +1,22 @@
 import { useEffect, useState } from "react"
-import { addDoc, collection, serverTimestamp, onSnapshot, query, where } from "firebase/firestore"
+import { addDoc, collection, serverTimestamp, onSnapshot, query, where, orderBy } from "firebase/firestore"
 import { auth, db } from '../firebase-config'
 
 export const Chat = ({ room }) => {
     const [newMessage, setNewMessage] = useState("");
+    const [messages, setMessages] = useState([]);
     const messagesRef = collection(db, "messages");
 
     useEffect(() => {
-        const queryMessages = query(messagesRef, where("room", "==", room))
-        onSnapshot(queryMessages, (snapshot) => {
-            console.log("NEW MESSAGE!");
+        const queryMessages = query(messagesRef, where("room", "==", room), orderBy("createdAt"))
+        const unsubscribe = onSnapshot(queryMessages, (snapshot) => {
+            let messages = [];
+            snapshot.forEach((doc) => {
+                messages.push({ ...doc.data(), id: doc.id })
+            })
+            setMessages(messages)
         })
+        return () => unsubscribe()
     }, [])
 
     const handleSubmit = async (e) => {
@@ -27,6 +33,17 @@ export const Chat = ({ room }) => {
     }
     return (
         <div className="chat-app">
+            <div className="header">
+                <h1>Welcome to: {room.toUpperCase()}</h1>
+            </div>
+            <div className="messages">
+                {messages.map((message) => (
+                    <div className="message" key={message.id}>
+                        <span className="user">{message.user}</span>
+                        {message.text}
+                    </div>
+                ))}
+            </div>
             <form className="new-message-form" onSubmit={handleSubmit}>
                 <input type="text" className="new-message-input"
                     placeholder="Type your message here..."
