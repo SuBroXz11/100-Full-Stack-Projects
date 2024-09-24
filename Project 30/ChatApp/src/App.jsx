@@ -19,7 +19,7 @@ const App = () => {
   return (
     <div>
       {room ? (
-        <Chat />
+        <Chat room={room} />
       ) : (
         <div className="room">
           <label htmlFor="">Enter Room Name: </label>
