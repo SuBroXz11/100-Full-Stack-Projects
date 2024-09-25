@@ -1,5 +1,9 @@
-export default function App() {
+import DynamicSearch from "./components/DynamicSearch";
+
+function App() {
   return (
-    <div>Hello world</div>
+    <DynamicSearch />
   )
 }
+
+export default App;
