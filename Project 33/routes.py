@@ -1,12 +1,14 @@
 from flask import Blueprint, render_template
 from controllers.users import add_user_function
 import sys
+from models.user import User
 
 main = Blueprint('main', __name__) #routename = main
 
 @main.route('/', methods=['GET'])
 def home():
-    return render_template('index.html')
+    data=User.get_all()
+    return render_template('index.html', data=data)
 
 @main.route('/adduser', methods=['GET', 'POST'])
 def add_user():
