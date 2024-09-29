@@ -24,7 +24,7 @@
                         <th scope="col">Id</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Password</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,6 +33,10 @@
                         <th scope="row">{{ item.id }}</th>
                         <td>{{ item.name }}</td>
                         <td>{{ item.email }}</td>
+                        <td>
+                            <button class="btn btn-success">Edit</button> |
+                            <button class="btn btn-danger">Delete</button>
+                        </td>
                         {% endfor %}
                     </tr>
                 </tbody>
