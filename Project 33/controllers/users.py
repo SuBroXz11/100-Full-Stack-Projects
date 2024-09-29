@@ -2,7 +2,7 @@ from flask import request
 from models.user import User
 
 def add_user_function():
-    if request.method == ["POST"]:
+    if request.method == "POST":
         name=request.form['name']
         email=request.form['email']
         password=request.form['password']
