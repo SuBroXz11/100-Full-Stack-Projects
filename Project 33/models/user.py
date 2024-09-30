@@ -31,3 +31,7 @@ class User(db.Model):
         for i in r:
             result.append(i.data)
         return result
+    
+    @classmethod
+    def get_by_id(cls, id):
+        return cls.query.filter(cls.id==id).first()
